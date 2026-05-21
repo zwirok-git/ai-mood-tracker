@@ -41,4 +41,11 @@ class JournalEntry(models.Model):
         ordering = ["-created_at"]
 
 
+class MoodTag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    journal_entry = models.ManyToManyField(to=JournalEntry, related_name="tags")
+    color = models.CharField(max_length=255)
+    emoji = models.CharField(max_length=255)
 
+    class Meta:
+        ordering = ["name"]

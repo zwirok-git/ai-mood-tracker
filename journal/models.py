@@ -49,3 +49,19 @@ class MoodTag(models.Model):
 
     class Meta:
         ordering = ["name"]
+
+
+class AIInsight(models.Model):
+    journal_entry = models.OneToOneField(
+        to=JournalEntry,
+        on_delete=models.CASCADE,
+        related_name="ai_insight",
+    )
+
+    summary = models.TextField()
+
+    emotions = models.JSONField()
+
+    recommendations = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)

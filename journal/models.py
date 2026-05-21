@@ -15,7 +15,30 @@ class AIStatus(models.TextChoices):
     FAILED = "FAILED", "Failed"
 
 
+class JournalEntry(models.Model):
+    user = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name="entries",
+    )
 
+    title = models.CharField(max_length=255, blank=True)
+    content = models.TextField()
+
+    mood_score = models.PositiveSmallIntegerField(
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(10),
+        ]
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    ai_status = models.CharField(choices=AIStatus, default=AIStatus.PENDING)
+
+    class Meta:
+        ordering = ["-created_at"]
 
 
 

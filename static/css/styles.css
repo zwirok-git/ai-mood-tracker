@@ -1,0 +1,74 @@
+@keyframes float {
+
+    0%{
+        transform:
+            translate(0px,0px)
+            scale(1);
+    }
+
+    25%{
+        transform:
+            translate(60px,-30px)
+            scale(1.03);
+    }
+
+    50%{
+        transform:
+            translate(120px,-80px)
+            scale(1.1);
+    }
+
+    75%{
+        transform:
+            translate(50px,-120px)
+            scale(1.04);
+    }
+
+    100%{
+        transform:
+            translate(0px,0px)
+            scale(1);
+    }
+
+}
+
+.animate-float{
+    animation:
+        float
+        5s
+        ease-in-out
+        infinite;
+}
+
+.animate-float-delayed{
+    animation:
+        float
+        10s
+        ease-in-out
+        infinite;
+}
+
+.animate-float-slow{
+    animation:
+        float
+        20s
+        ease-in-out
+        infinite;
+}
+
+body{
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing:
+        antialiased;
+}
+
+.hero-title{
+    font-family: "Bebas Neue", sans-serif;
+    color: aliceblue;
+
+    letter-spacing:
+        0.03em;
+
+    line-height:
+        0.95;
+}

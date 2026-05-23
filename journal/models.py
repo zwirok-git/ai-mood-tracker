@@ -5,7 +5,9 @@ from django.db import models
 
 class User(AbstractUser):
     class Meta:
-        ordering = ["-last_login",]
+        ordering = [
+            "-last_login",
+        ]
 
 
 class AIStatus(models.TextChoices):

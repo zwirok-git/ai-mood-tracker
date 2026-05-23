@@ -1,20 +1,22 @@
 {% extends "base.html" %}
-{% block title %}AI Mood Tracker{% endblock %}
+{% block title %}Mood Tracker{% endblock %}
 {% block content %}
     {% include "includes/navbar.html" %}
     <section class="hero">
-        <span class="eyebrow">UNDERSTAND YOUR INNER WORLD</span>
-        <h1 class="hero-title">Mood Tracker</h1>
-        <p class="hero-text">
-            A private space to reflect,
-            observe emotional patterns,
-            and continue writing.
-        </p>
-        <div class="hero-actions">
-            <a href="#journal" class="primary-btn">Start your journey →</a>
-            <a href="#reflection" class="secondary-btn">Learn more ↓</a>
+        <div class="hero-content">
+            <span class="eyebrow">UNDERSTAND YOUR INNER WORLD</span>
+            <h1 class="hero-title">Mood Tracker</h1>
+            <p class="hero-text">
+                A private space to reflect,
+                observe emotional patterns,
+                and continue writing.
+            </p>
+            <div class="hero-actions">
+                <a href="#journal" class="primary-btn">Start your journey →</a>
+                <a href="#reflection" class="secondary-btn">Learn more ↓</a>
+            </div>
+            <div class="hero-footer">Designed by Oleksii Prokopenko</div>
         </div>
-        <div class="hero-footer">🔒 Your data stays private.</div>
     </section>
     <!-- JOURNAL -->
     <section id="journal" class="section split">
@@ -39,9 +41,9 @@
             </div>
             <div class="card-bottom">
                 <div class="chips">
-                    <span>Calm</span>
-                    <span>Reflective</span>
-                    <span>Evening</span>
+                    <span>MoodTag</span>
+                    <span>MoodTag</span>
+                    <span>MoodTag</span>
                 </div>
                 <button class="primary-btn">Save reflection</button>
             </div>
@@ -68,60 +70,7 @@
                     feel calmer and longer.
                 </div>
             </div>
-            <div class="blob"></div>
             <button class="secondary-btn">Generate insight</button>
         </div>
-    </section>
-    <!-- TIMELINE -->
-    <section class="section">
-        <div class="section-id">03</div>
-        <h2>Recent reflections</h2>
-        <div class="timeline">
-            <div class="mini-card">
-                May 20
-                <p>Today felt quieter.</p>
-            </div>
-            <div class="mini-card">
-                May 18
-                <p>Stayed with thoughts.</p>
-            </div>
-            <div class="mini-card">
-                May 14
-                <p>Needed more silence.</p>
-            </div>
-        </div>
-    </section>
-    <!-- PRIVACY -->
-    <section class="section split">
-        <div>
-            <div class="section-id">04</div>
-            <h2>Private by design</h2>
-            <p>
-                Your writing belongs to you.
-                Insights remain optional.
-            </p>
-        </div>
-        <div class="privacy-grid">
-            <div class="mini-card">
-                🔒
-                <br>
-                Encrypted
-            </div>
-            <div class="mini-card">
-                🫥
-                <br>
-                Private
-            </div>
-            <div class="mini-card">
-                🕊
-                <br>
-                No pressure
-            </div>
-        </div>
-    </section>
-    <section class="cta">
-        <h2>Begin your journey.</h2>
-        <p>Create your own quiet space.</p>
-        <a class="primary-btn">Create account →</a>
     </section>
 {% endblock %}

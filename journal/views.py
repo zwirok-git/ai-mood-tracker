@@ -20,3 +20,14 @@ class UserDetailView(generic.DetailView):
     model = get_user_model()
 
 
+class UserUpdateView(generic.UpdateView):
+    model = get_user_model()
+    fields = [
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+
+    ]
+    template_name_suffix = "_update_form"
+    success_url = "/"

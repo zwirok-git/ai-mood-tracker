@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -13,3 +14,9 @@ class IndexView(generic.TemplateView):
 class UserLoginView(LoginView):
     form_class = UserLoginForm
     template_name = "registration/login.html"
+
+
+class UserDetailView(generic.DetailView):
+    model = get_user_model()
+
+

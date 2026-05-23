@@ -72,20 +72,15 @@ main {
 
     min-height: 100svh;
 
-    max-width: 1700px;
-
-    margin: 0 auto;
-
     padding:
-        0 8vw 10vh;
+
+        72px 8vw 2vh;
 
     display: flex;
 
     flex-direction: column;
 
     justify-content: center;
-
-    align-items: flex-start;
 
 }
 
@@ -327,6 +322,8 @@ main {
     line-height: 1.9;
 
     opacity: .88;
+
+    margin-bottom: 15px;
 
 }
 
@@ -692,117 +689,112 @@ main {
 
 /* ---------- NAVBAR ---------- */
 
-.navbar{
+.navbar {
 
-position:fixed;
+    position: fixed;
 
-top:0;
+    top: 0;
 
-left:0;
+    left: 0;
 
-right:0;
+    right: 0;
 
-z-index:100;
+    z-index: 100;
 
-padding:
+    padding:
 
-32px
-8vw;
+        32px 8vw;
 
-display:flex;
+    display: flex;
 
-justify-content:space-between;
+    justify-content: space-between;
 
-align-items:center;
+    align-items: center;
 
-background:
+    background:
 
-linear-gradient(
-180deg,
-rgba(12,14,90,.18),
-transparent
-);
+        linear-gradient(180deg,
+            rgba(12, 14, 90, .18),
+            transparent);
 
-backdrop-filter:
+    backdrop-filter:
 
-blur(30px);
+        blur(30px);
 
 }
 
-.nav-logo{
+.nav-logo {
 
-font-size:1rem;
+    font-size: 1rem;
 
-font-weight:600;
+    font-weight: 600;
 
-color:white;
+    color: white;
 
-text-decoration:none;
+    text-decoration: none;
 
-letter-spacing:.08em;
+    letter-spacing: .08em;
 
-opacity:.95;
-
-}
-
-.nav-links{
-
-display:flex;
-
-align-items:center;
-
-gap:32px;
+    opacity: .95;
 
 }
 
-.nav-links a{
+.nav-links {
 
-color:
+    display: flex;
 
-rgba(255,255,255,.72);
+    align-items: center;
 
-text-decoration:none;
-
-transition:.25s;
+    gap: 32px;
 
 }
 
-.nav-links a:hover{
+.nav-links a {
 
-color:white;
+    color:
 
-}
+        rgba(255, 255, 255, .72);
 
-.nav-cta{
+    text-decoration: none;
 
-padding:
-
-14px
-24px;
-
-border-radius:999px;
-
-border:
-
-1px solid
-rgba(255,255,255,.14);
-
-background:
-
-rgba(255,255,255,.05);
-
-backdrop-filter:
-
-blur(20px);
+    transition: .25s;
 
 }
 
-@media(max-width:900px){
+.nav-links a:hover {
 
-.nav-links{
-
-display:none;
+    color: white;
 
 }
+
+.nav-cta {
+
+    padding:
+
+        14px 24px;
+
+    border-radius: 999px;
+
+    border:
+
+        1px solid rgba(255, 255, 255, .14);
+
+    background:
+
+        rgba(255, 255, 255, .05);
+
+    backdrop-filter:
+
+        blur(20px);
+
+}
+
+@media(max-width:900px) {
+
+    .nav-links {
+
+        display: none;
+
+    }
 
 }

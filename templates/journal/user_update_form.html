@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Edit profile{% endblock %}
+{% block content %}
+    {% include "includes/navbar.html" %}
+    <section class="login-layout">
+        <section class="login-copy">
+            <h1>
+                Edit
+                <br>
+                profile.
+            </h1>
+            <p>
+                Update your identity and
+                keep your journal personal.
+            </p>
+        </section>
+        <section class="login-panel">
+            <form method="post" class="login-form", style="transform: scale(0.90)">
+                {% csrf_token %}
+                <h2>Profile settings</h2>
+                {% for field in form %}
+                    <div class="field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}<small class="field-help">{{ field.help_text }}</small>{% endif %}
+                        {% for error in field.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                    </div>
+                {% endfor %}
+                <button class="primary-btn" type="submit">Save changes →</button>
+            </form>
+        </section>
+    </section>
+{% endblock %}

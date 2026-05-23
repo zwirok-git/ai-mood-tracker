@@ -803,7 +803,7 @@ main {
 
 .login-layout {
 
-    min-height: 100svh;
+    min-height: calc(100svh - 88px);
 
     display: grid;
 
@@ -1107,5 +1107,60 @@ main {
         font-size: 5rem;
 
     }
+
+}
+
+/* ---------- PROFILE ---------- */
+
+.field-help {
+
+    margin-left: 10px;
+
+    margin-top: 6px;
+
+    font-size: .85rem;
+
+    opacity: .45;
+
+    line-height: 1.5;
+
+}
+
+.field-error {
+
+    margin-left: 10px;
+
+    margin-top: 6px;
+
+    color:
+
+        rgba(255, 190, 190, .9);
+
+}
+
+.login-form textarea,
+.login-form select {
+
+    width: 100%;
+
+    border-radius: 28px;
+
+    padding: 24px;
+
+    background:
+
+        rgba(255, 255, 255, .05);
+
+    border:
+
+        1px solid rgba(255, 255, 255, .08);
+
+    color: white;
+
+}
+
+.login-form label {
+
+    margin-left: 8px;
 
 }

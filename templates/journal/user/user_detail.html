@@ -29,7 +29,7 @@
                     <label>Last name</label>
                     <div>{{ user.last_name }}</div>
                 </div>
-                <a href="{% url "profile-edit" user.id %}" class="primary-btn">Edit profile →</a>
+                <a href="{% url "account:profile-edit" user.id %}" class="primary-btn">Edit profile →</a>
             </div>
         </section>
     </section>

@@ -28,7 +28,7 @@
                 {% endfor %}
                 <div class="profile-actions">
                     <button class="primary-btn" type="submit">Save changes →</button>
-                    <a href="{% url "profile-delete" user.id %}" class="danger-btn">Delete account</a>
+                    <a href="{% url "account:profile-delete" user.id %}" class="danger-btn">Delete account</a>
                 </div>
             </form>
         </section>

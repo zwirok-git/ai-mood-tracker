@@ -2,13 +2,13 @@
     <a href="{% url "home" %}" class="nav-logo">Mood Tracker</a>
     <div class="nav-links">
         {% if user.is_authenticated %}
-            <a href="{% url "journal-entry-list" %}">Journal</a>
+            <a href="{% url "journal:journal-entry-list" %}">Journal</a>
         {% else %}
             <a href="#journal">Journal</a>
         {% endif %}
         <a href="#reflection">Reflection</a>
         {% if user.is_authenticated %}
-            <a href="{% url "profile" user.id %}">Profile</a>
+            <a href="{% url "account:profile" user.id %}">Profile</a>
             <form method="post" action="{% url "logout" %}" class="logout-form">
                 {% csrf_token %}
                 <button type="submit" class="nav-cta">Logout →</button>

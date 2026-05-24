@@ -46,10 +46,14 @@ class JournalEntry(models.Model):
 class MoodTag(models.Model):
     name = models.CharField(max_length=255, unique=True)
     journal_entry = models.ManyToManyField(to=JournalEntry, related_name="tags")
-    emoji = models.CharField(max_length=255)
+    color = models.CharField(max_length=7)
+    emoji = models.CharField(max_length=255, unique=True)
 
     class Meta:
         ordering = ["name"]
+
+    def __str__(self):
+        return self.name
 
 
 class AIInsight(models.Model):

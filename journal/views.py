@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from journal.forms import UserLoginForm
+from journal.models import JournalEntry
 
 
 class IndexView(generic.TemplateView):
@@ -49,3 +50,12 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
 
     def test_func(self):
         return  self.request.user == self.get_object()
+
+
+class JournalEntryListView(LoginRequiredMixin, generic.ListView):
+    model = JournalEntry
+    template_name = "journal/journal_entry_list.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return JournalEntry.objects.filter(user=self.request.user)

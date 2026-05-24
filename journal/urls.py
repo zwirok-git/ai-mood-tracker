@@ -8,6 +8,7 @@ from journal.views import (
     UserCreateView,
     IndexView,
     UserDeleteView,
+    JournalEntryListView,
 )
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
     path("register/", UserCreateView.as_view(), name="register"),
     path("", IndexView.as_view(), name="home"),
     path("profile/<int:pk>/delete/", UserDeleteView.as_view(), name="profile-delete"),
+    path("journal/", JournalEntryListView.as_view(), name="journal-entry-list")
 
     # HTMX-urls
 ]

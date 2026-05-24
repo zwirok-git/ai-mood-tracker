@@ -1296,3 +1296,65 @@ main {
         translateY(0);
 
 }
+
+.empty-state {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+    align-items: flex-start;
+
+    max-width: 420px;
+
+}
+
+.empty-state h2 {
+
+    font-size: 2rem;
+
+}
+
+.empty-state p {
+
+    line-height: 1.7;
+
+    opacity: .9;
+
+}
+
+.empty-state .primary-btn {
+
+    width: fit-content;
+
+}
+
+.nav-logo {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+}
+
+.brand-icon {
+
+    width: 28px;
+
+    height: 28px;
+
+    object-fit: contain;
+
+    display: block;
+
+    flex-shrink: 0;
+
+}

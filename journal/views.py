@@ -59,3 +59,19 @@ class JournalEntryListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return JournalEntry.objects.filter(user=self.request.user)
+
+
+class JournalEntryCreateView:
+    pass
+
+
+class JournalEntryUpdateView:
+    pass
+
+
+class JournalEntryDeleteView:
+    pass
+
+
+class JournalEntryDetailView:
+    pass

@@ -15,7 +15,7 @@
             </p>
         </section>
         <section class="login-panel">
-            <form method="post" class="login-form", style="transform: scale(0.90)">
+            <form method="post" class="login-form" style="transform: scale(0.90)">
                 {% csrf_token %}
                 <h2>Profile settings</h2>
                 {% for field in form %}
@@ -26,7 +26,10 @@
                         {% for error in field.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
                     </div>
                 {% endfor %}
-                <button class="primary-btn" type="submit">Save changes →</button>
+                <div class="profile-actions">
+                    <button class="primary-btn" type="submit">Save changes →</button>
+                    <a href="{% url "profile-delete" user.id %}" class="danger-btn">Delete account</a>
+                </div>
             </form>
         </section>
     </section>

@@ -26,7 +26,8 @@
                 <div class="delete-warning">This action cannot be undone.</div>
                 <div class="profile-actions">
                     <button type="submit" class="danger-btn">Delete forever</button>
-                    <a href="{% url "account:profile-edit" object.id %}" class="secondary-btn">Cancel</a>
+                    <a href="{% url "account:profile-edit" object.id %}"
+                       class="secondary-btn">Cancel</a>
                 </div>
             </form>
         </section>

@@ -31,3 +31,8 @@ class UserUpdateView(generic.UpdateView):
     ]
     template_name_suffix = "_update_form"
     success_url = "/"
+
+
+class UserDeleteView(generic.DeleteView):
+    model = get_user_model()
+    success_url = reverse_lazy("home")

@@ -13,17 +13,21 @@ class JournalEntryListView(LoginRequiredMixin, generic.ListView):
         return JournalEntry.objects.filter(user=self.request.user)
 
 
-class JournalEntryCreateView:
-    pass
+class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_create_form.html"
 
 
-class JournalEntryUpdateView:
-    pass
+class JournalEntryUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_update.html"
 
 
-class JournalEntryDeleteView:
-    pass
+class JournalEntryDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_delete.html"
 
 
-class JournalEntryDetailView:
-    pass
+class JournalEntryDetailView(LoginRequiredMixin, generic.DetailView):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_detail.html"

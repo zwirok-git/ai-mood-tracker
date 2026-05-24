@@ -17,17 +17,17 @@
         </section>
         <section class="login-panel">
             <section class="journal-feed">
-                <section class="journal-top">
-                    <div>
-                        <h2>Recent entries</h2>
-                        <small>
-                            {{ page_obj.paginator.count }}
-                            reflections
-                        </small>
-                    </div>
-                    <a href="{% url "journal:entry-create" %}" class="primary-btn">New entry →</a>
-                </section>
                 {% if object_list %}
+                    <section class="journal-top">
+                        <div>
+                            <h2>Recent entries</h2>
+                            <small>
+                                {{ page_obj.paginator.count }}
+                                reflections
+                            </small>
+                        </div>
+                        <a href="{% url "journal:entry-create" %}" class="primary-btn">New entry →</a>
+                    </section>
                     {% for entry in object_list %}
                         <article class="entry-card">
                             <div class="entry-meta">
@@ -36,7 +36,7 @@
                             </div>
                             <h3>{{ entry.title|default:"Untitled reflection" }}</h3>
                             <p>{{ entry.content|truncatechars:140 }}</p>
-                            {% if entry.tags.exists %}
+                            {% if entry.tags.all %}
                                 <div class="entry-tags">
                                     {% for tag in entry.tags.all %}
                                         <span class="mood-pill"
@@ -48,17 +48,17 @@
                                     {% endfor %}
                                 </div>
                             {% endif %}
-                            <a href="{% url "journal:entry" entry.id %}"  class="entry-link">Read →</a>
+                            <a href="{% url "journal:entry" entry.id %}" class="entry-link">Read →</a>
                         </article>
                     {% endfor %}
                 {% else %}
                     <section class="empty-state">
-                        <h2>No entries yet</h2>
+                        <h2>✨ Your journal is empty</h2>
                         <p>
                             Start writing your
                             first reflection.
                         </p>
-                        <a href="{% url "journal:entry-create" %}"  class="primary-btn">Create first entry</a>
+                        <a href="{% url "journal:entry-create" %}" class="primary-btn">Create first entry →</a>
                     </section>
                 {% endif %}
             </section>

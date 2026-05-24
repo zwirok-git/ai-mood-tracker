@@ -31,13 +31,18 @@ class JournalEntry(models.Model):
         validators=[
             MinValueValidator(1),
             MaxValueValidator(10),
-        ]
+        ],
+        help_text="1 = very low, 10 = excellent"
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    ai_status = models.CharField(choices=AIStatus, default=AIStatus.PENDING)
+    ai_status = models.CharField(
+        max_length=20,
+        choices=AIStatus,
+        default=AIStatus.PENDING
+    )
 
     class Meta:
         ordering = ["-created_at"]
@@ -45,9 +50,9 @@ class JournalEntry(models.Model):
 
 class MoodTag(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    journal_entry = models.ManyToManyField(to=JournalEntry, related_name="tags")
+    journal_entry = models.ManyToManyField(to=JournalEntry, related_name="tags", blank=True)
     color = models.CharField(max_length=7)
-    emoji = models.CharField(max_length=255, unique=True)
+    emoji = models.CharField(max_length=32,)
 
     class Meta:
         ordering = ["name"]
@@ -65,7 +70,7 @@ class AIInsight(models.Model):
 
     summary = models.TextField()
 
-    emotions = models.JSONField()
+    emotions = models.JSONField(default=dict)
 
     recommendations = models.TextField()
 

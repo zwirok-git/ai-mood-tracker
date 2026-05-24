@@ -1208,3 +1208,91 @@ main {
     font-size: .95rem;
 
 }
+
+.profile-actions {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+}
+
+.danger-btn {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 100%;
+
+    padding:
+
+        20px
+        40px;
+
+    border-radius: 999px;
+
+    border:
+
+        1px solid
+        rgba(
+            255,
+            120,
+            120,
+            .25
+        );
+
+    background:
+
+        rgba(
+            255,
+            80,
+            80,
+            .30
+        );
+
+    color:
+
+        rgb(
+            255,
+            190,
+            190
+        );
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        .2s;
+
+}
+
+.danger-btn:hover {
+
+    transform:
+
+        translateY(-2px);
+
+    background:
+
+        rgba(
+            255,
+            80,
+            80,
+            .60
+        );
+
+}
+
+.danger-btn:active {
+
+    transform:
+
+        translateY(0);
+
+}

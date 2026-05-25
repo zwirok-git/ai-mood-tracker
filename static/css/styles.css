@@ -375,6 +375,42 @@ main {
 
 }
 
+.card-title {
+
+    font-size: .95rem;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+    opacity: .62;
+
+}
+
+.reflection-mark {
+
+    width: 56px;
+
+    height: 56px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, .08);
+
+    border:
+        1px solid rgba(255, 255, 255, .10);
+
+    flex: 0 0 auto;
+
+}
+
 /* ---------- CARD FOOTER ---------- */
 
 .card-bottom {

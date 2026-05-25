@@ -29,7 +29,7 @@
                 emotions,
                 and daily experiences.
             </p>
-            <a class="secondary-btn">Explore journal →</a>
+            <a href="{% url "journal:journal-entry-list" %}" class="secondary-btn">Explore journal →</a>
         </div>
         <div class="glass-card">
             <div class="card-title">How are you feeling today?</div>
@@ -41,9 +41,9 @@
             </div>
             <div class="card-bottom">
                 <div class="chips">
-                    <span>MoodTag</span>
-                    <span>MoodTag</span>
-                    <span>MoodTag</span>
+                    <span>Calm</span>
+                    <span>Curious</span>
+                    <span>Grounded</span>
                 </div>
                 <button class="primary-btn">Save reflection</button>
             </div>
@@ -58,11 +58,11 @@
                 AI notices patterns.
                 You decide what they mean.
             </p>
-            <a class="secondary-btn">See how it works →</a>
+            <a href="#journal" class="secondary-btn">See how it works →</a>
         </div>
         <div class="glass-card">
             <div class="ai-row">
-                <div>✨</div>
+                <div class="reflection-mark">✨</div>
                 <div>
                     You tend to write
                     more slowly during evenings.

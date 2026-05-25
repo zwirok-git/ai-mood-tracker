@@ -156,6 +156,7 @@ DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "Mood Tracker <noreply
 
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_FORMS = {"signup": "journal.forms.UserSignupForm"}
 ACCOUNT_LOGIN_METHODS = {"username", "email"}
 ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*", "password2*", "first_name*", "last_name*"]
 ACCOUNT_LOGIN_ON_SIGNUP = False

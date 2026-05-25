@@ -82,6 +82,8 @@ class RegistrationTests(TestCase):
         user = get_user_model().objects.get(username="newuser")
         email_address = EmailAddress.objects.get(user=user, email="newuser-signup@example.com")
 
+        self.assertEqual(user.first_name, "New")
+        self.assertEqual(user.last_name, "User")
         self.assertTrue(user.is_active)
         self.assertFalse(email_address.verified)
         self.assertEqual(len(mail.outbox), 1)

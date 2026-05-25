@@ -1231,37 +1231,29 @@ main {
 
     padding:
 
-        20px
-        40px;
+        20px 40px;
 
     border-radius: 999px;
 
     border:
 
-        1px solid
-        rgba(
-            255,
+        1px solid rgba(255,
             120,
             120,
-            .25
-        );
+            .25);
 
     background:
 
-        rgba(
-            255,
+        rgba(255,
             80,
             80,
-            .30
-        );
+            .30);
 
     color:
 
-        rgb(
-            255,
+        rgb(255,
             190,
-            190
-        );
+            190);
 
     text-decoration: none;
 
@@ -1280,12 +1272,10 @@ main {
 
     background:
 
-        rgba(
-            255,
+        rgba(255,
             80,
             80,
-            .60
-        );
+            .60);
 
 }
 

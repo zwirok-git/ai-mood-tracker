@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
+    {% include "includes/navbar.html" %}
+    <section class="login-layout">
+        <section class="login-copy">
+            <h1>{{ object.title|default:"Reflection" }}</h1>
+            <p>{{ object.created_at|date:"F d, Y" }}</p>
+        </section>
+        <section class="login-panel">
+            <article class="entry-card">
+                <div class="entry-meta">
+                    <span>
+                        Mood:
+                        {{ object.mood_score }}/10
+                    </span>
+                    <span>{{ object.ai_status }}</span>
+                </div>
+                <p>{{ object.content|linebreaks }}</p>
+                {% if object.tags.all %}
+                    <div class="entry-tags">
+                        {% for tag in object.tags.all %}
+                            <span class="mood-pill"
+                                  style="border-color: {{ tag.color }};
+                                         color: {{ tag.color }}">
+                                {{ tag.emoji }}
+                                {{ tag.name }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="profile-actions">
+                    <a href="{% url 'journal:entry-edit' object.id %}" class="primary-btn">Edit →</a>
+                    <a href="{% url 'journal:entry-delete' object.id %}" class="danger-btn">Delete</a>
+                </div>
+            </article>
+        </section>
+    </section>
+{% endblock %}

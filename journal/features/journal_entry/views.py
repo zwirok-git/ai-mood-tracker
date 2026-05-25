@@ -29,7 +29,7 @@ class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 
-class JournalEntryUpdateView(LoginRequiredMixin, generic.UpdateView):
+class JournalEntryUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_form.html"
     form_class = JournalEntryForm
@@ -42,7 +42,7 @@ class JournalEntryUpdateView(LoginRequiredMixin, generic.UpdateView):
         return self.get_object().user == self.request.user
 
 
-class JournalEntryDeleteView(LoginRequiredMixin, generic.DeleteView):
+class JournalEntryDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_delete.html"
     success_url = reverse_lazy("journal:journal-entry-list")

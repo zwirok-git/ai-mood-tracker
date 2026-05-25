@@ -148,7 +148,15 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-ACCOUNT_EMAIL_VERIFICATION = "none"
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.console.EmailBackend",
+)
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "Mood Tracker <noreply@example.com>")
+
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_LOGIN_METHODS = {"username", "email"}
 ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*", "password2*", "first_name*", "last_name*"]
-ACCOUNT_LOGIN_ON_SIGNUP = True
+ACCOUNT_LOGIN_ON_SIGNUP = False
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True

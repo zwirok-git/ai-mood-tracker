@@ -1,5 +1,10 @@
+import re
+from urllib.parse import urlparse
+
+from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.core import mail
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from journal.models import JournalEntry
@@ -55,13 +60,17 @@ class JournalEntryPermissionsTests(TestCase):
         self.assertTrue(JournalEntry.objects.filter(pk=self.entry.pk).exists())
 
 
+@override_settings(
+    ALLOWED_HOSTS=["testserver"],
+    EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend",
+)
 class RegistrationTests(TestCase):
-    def test_user_can_register_with_allauth(self):
+    def test_signup_sends_verification_email(self):
         response = self.client.post(
             reverse("register"),
             {
                 "username": "newuser",
-                "email": "newuser@example.com",
+                "email": "newuser-signup@example.com",
                 "first_name": "New",
                 "last_name": "User",
                 "password1": "strong-test-password",
@@ -70,4 +79,33 @@ class RegistrationTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(get_user_model().objects.filter(username="newuser").exists())
+        user = get_user_model().objects.get(username="newuser")
+        email_address = EmailAddress.objects.get(user=user, email="newuser-signup@example.com")
+
+        self.assertTrue(user.is_active)
+        self.assertFalse(email_address.verified)
+        self.assertEqual(len(mail.outbox), 1)
+
+    def test_email_confirmation_activates_user(self):
+        self.client.post(
+            reverse("register"),
+            {
+                "username": "confirmeduser",
+                "email": "confirmeduser@example.com",
+                "first_name": "New",
+                "last_name": "User",
+                "password1": "strong-test-password",
+                "password2": "strong-test-password",
+            },
+        )
+        confirmation_url = re.search(
+            r"http://testserver(?P<path>/accounts/confirm-email/[^\s]+/)",
+            mail.outbox[0].body,
+        )
+        self.assertIsNotNone(confirmation_url)
+
+        self.client.get(urlparse(confirmation_url.group("path")).path)
+
+        user = get_user_model().objects.get(username="confirmeduser")
+        email_address = EmailAddress.objects.get(user=user, email="confirmeduser@example.com")
+        self.assertTrue(email_address.verified)

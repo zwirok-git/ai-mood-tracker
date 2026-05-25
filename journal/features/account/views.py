@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views import generic
+from allauth.account.views import SignupView
 
 
 class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
@@ -27,8 +28,8 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
         return  self.request.user == self.get_object()
 
 
-class UserCreateView(generic.CreateView):
-    pass
+class UserCreateView(SignupView):
+    template_name = "registration/registration.html"
 
 
 class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):

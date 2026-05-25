@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}{{ object.title|default:"Reflection" }}{% endblock %}
 {% block content %}
     {% include "includes/navbar.html" %}
     <section class="login-layout">
@@ -8,7 +8,7 @@
             <p>{{ object.created_at|date:"F d, Y" }}</p>
         </section>
         <section class="login-panel">
-            <article class="entry-card">
+            <article class="entry-card entry-detail-card">
                 <div class="entry-meta">
                     <span>
                         Mood:
@@ -16,7 +16,7 @@
                     </span>
                     <span>{{ object.ai_status }}</span>
                 </div>
-                <p>{{ object.content|linebreaks }}</p>
+                <div class="entry-content">{{ object.content|linebreaks }}</div>
                 {% if object.tags.all %}
                     <div class="entry-tags">
                         {% for tag in object.tags.all %}
@@ -30,8 +30,8 @@
                     </div>
                 {% endif %}
                 <div class="profile-actions">
-                    <a href="{% url 'journal:entry-edit' object.id %}" class="primary-btn">Edit →</a>
-                    <a href="{% url 'journal:entry-delete' object.id %}" class="danger-btn">Delete</a>
+                    <a href="{% url "journal:entry-edit" object.id %}" class="primary-btn">Edit →</a>
+                    <a href="{% url "journal:entry-delete" object.id %}" class="danger-btn">Delete</a>
                 </div>
             </article>
         </section>

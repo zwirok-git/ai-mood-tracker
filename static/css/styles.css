@@ -1411,6 +1411,24 @@ main {
 
 }
 
+.entry-detail-card {
+
+    width: 100%;
+
+    max-width: 680px;
+
+}
+
+.entry-content {
+
+    line-height: 1.85;
+
+    opacity: .86;
+
+    margin: 18px 0 28px;
+
+}
+
 .entry-meta,
 .entry-tags {
 

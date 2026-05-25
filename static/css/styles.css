@@ -1261,6 +1261,16 @@ main {
 
 }
 
+.account-note {
+
+    margin: 0;
+
+    line-height: 1.8;
+
+    opacity: .76;
+
+}
+
 .profile-actions {
 
     display: flex;

@@ -1195,6 +1195,22 @@ main {
 
 }
 
+.journal-entry-form textarea {
+
+    min-height: 240px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+
+}
+
+.journal-entry-form input[type="number"] {
+
+    max-width: 180px;
+
+}
+
 .login-form label {
 
     margin-left: 8px;

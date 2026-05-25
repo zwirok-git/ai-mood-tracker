@@ -34,7 +34,7 @@
             </p>
         </section>
         <section class="login-panel">
-            <form method="post" class="login-form">
+            <form method="post" class="login-form journal-entry-form">
                 {% csrf_token %}
                 <h2>
                     {% if object %}
@@ -60,7 +60,7 @@
                         {% endif %}
                     </button>
                     {% if object %}
-                        <a href="{% url 'journal:entry-delete' object.id %}"  class="danger-btn">Delete entry</a>
+                        <a href="{% url "journal:entry-delete" object.id %}" class="danger-btn">Delete entry</a>
                     {% endif %}
                 </div>
             </form>

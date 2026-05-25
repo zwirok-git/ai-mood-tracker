@@ -1323,6 +1323,137 @@ main {
 
 }
 
+.journal-feed {
+
+    width: 100%;
+
+    max-width: 680px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+.journal-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 32px;
+
+    margin-bottom: 8px;
+
+}
+
+.journal-top h2,
+.entry-card h3 {
+
+    margin: 0;
+
+}
+
+.journal-top small,
+.entry-meta {
+
+    opacity: .55;
+
+}
+
+.entry-card {
+
+    padding: 34px;
+
+    border-radius: 32px;
+
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, .08),
+            rgba(255, 255, 255, .03));
+
+    border:
+        1px solid rgba(255, 255, 255, .07);
+
+    backdrop-filter:
+        blur(60px);
+
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, .10);
+
+}
+
+.entry-card p {
+
+    line-height: 1.7;
+
+    opacity: .78;
+
+}
+
+.entry-meta,
+.entry-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+}
+
+.entry-meta {
+
+    margin-bottom: 18px;
+
+    font-size: .9rem;
+
+}
+
+.entry-tags {
+
+    margin: 24px 0 8px;
+
+}
+
+.mood-pill {
+
+    padding: 10px 14px;
+
+    border-radius: 999px;
+
+    border:
+        1px solid rgba(255, 255, 255, .12);
+
+    background:
+        rgba(255, 255, 255, .05);
+
+}
+
+.entry-link {
+
+    display: inline-flex;
+
+    margin-top: 24px;
+
+    color: white;
+
+    text-decoration: none;
+
+    opacity: .76;
+
+}
+
+.entry-link:hover {
+
+    opacity: 1;
+
+}
+
 .empty-state {
 
     display: flex;

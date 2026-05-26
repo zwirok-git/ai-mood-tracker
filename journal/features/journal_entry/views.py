@@ -13,9 +13,9 @@ class JournalEntryListView(LoginRequiredMixin, generic.ListView):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_list.html"
     paginate_by = 2
-    
+
     def get_queryset(self):
-        return JournalEntry.objects.filter(user=self.request.user)
+        return JournalEntry.objects.filter(user=self.request.user).prefetch_related("tags")
 
 
 class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
@@ -30,16 +30,13 @@ class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-
-
 class JournalEntryUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_form.html"
     form_class = JournalEntryForm
 
     def get_success_url(self):
-        return reverse("journal:entry", args=[self.object.pk],
-        )
+        return reverse("journal:entry", args=[self.object.pk])
 
     def test_func(self):
         return self.get_object().user == self.request.user
@@ -62,9 +59,6 @@ class JournalEntryDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.De
         return self.get_object().user == self.request.user
 
 
-
-
-
 #HTMX views
 
 
@@ -79,10 +73,7 @@ class GenerateInsightView(LoginRequiredMixin, View):
             )
         )
 
-        insight = (
-            InsightService()
-            .generate_insight(entry)
-        )
+        insight = InsightService().generate_insight(entry)
 
         return render(
             request,

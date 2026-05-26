@@ -1,39 +1,71 @@
 {% extends "base.html" %}
 {% block title %}{{ object.title|default:"Reflection" }}{% endblock %}
 {% block content %}
-    {% include "includes/navbar.html" %}
-    <section class="login-layout">
-        <section class="login-copy">
-            <h1>{{ object.title|default:"Reflection" }}</h1>
-            <p>{{ object.created_at|date:"F d, Y" }}</p>
-        </section>
-        <section class="login-panel">
-            <article class="entry-card entry-detail-card">
-                <div class="entry-meta">
-                    <span>
-                        Mood:
-                        {{ object.mood_score }}/10
-                    </span>
-                    <span>{{ object.ai_status }}</span>
-                </div>
-                <div class="entry-content">{{ object.content|linebreaks }}</div>
-                {% if object.tags.all %}
-                    <div class="entry-tags">
-                        {% for tag in object.tags.all %}
-                            <span class="mood-pill"
-                                  style="border-color: {{ tag.color }};
-                                         color: {{ tag.color }}">
-                                {{ tag.emoji }}
-                                {{ tag.name }}
-                            </span>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="profile-actions">
-                    <a href="{% url "journal:entry-edit" object.id %}" class="primary-btn">Edit →</a>
-                    <a href="{% url "journal:entry-delete" object.id %}" class="danger-btn">Delete</a>
-                </div>
-            </article>
-        </section>
+  {% include "includes/navbar.html" %}
+  <section class="login-layout">
+    <section class="login-copy">
+      {% if object.ai_insight %}
+        <h1>
+          AI
+          <br>
+          reflection.
+        </h1>
+        <p>
+          Generated today ✨
+          <br>
+          Open the card to read.
+        </p>
+      {% else %}
+        <h1>
+          Create
+          <br>
+          insight.
+        </h1>
+        <p>
+          No reflection yet.
+          <br>
+          Generate one and discover patterns.
+        </p>
+        <form hx-post="{% url "journal:entry-generate-insight" object.id %}"
+              hx-target="#insight-container"
+              hx-swap="innerHTML">
+          {% csrf_token %}
+          <button type="submit"  class="primary-btn"  hx-disabled-elt="this">Generate insight ✨</button>
+          <small class="htmx-indicator">Generating...</small>
+        </form>
+      {% endif %}
     </section>
+    <section class="login-panel">
+      <article class="entry-card entry-detail-card">
+        <div class="entry-meta">
+          <span>
+            Mood:
+            {{ object.mood_score }}/10
+          </span>
+        </div>
+        <div class="entry-content">{{ object.content|linebreaks }}</div>
+        {% if object.tags.all %}
+          <div class="entry-tags">
+            {% for tag in object.tags.all %}
+              <span class="mood-pill"
+                    style="border-color: {{ tag.color }};
+                           color: {{ tag.color }}">
+                {{ tag.emoji }}
+                {{ tag.name }}
+              </span>
+            {% endfor %}
+          </div>
+        {% endif %}
+        <section id="insight-container">
+          {% if object.ai_insight %}
+            {% include "htmx_components/insight_section.html" with insight=object.ai_insight %}
+          {% endif %}
+        </section>
+        <div class="profile-actions">
+          <a href="{% url "journal:entry-edit" object.id %}"  class="primary-btn">Edit →</a>
+          <a href="{% url "journal:entry-delete" object.id %}"  class="danger-btn">Delete</a>
+        </div>
+      </article>
+    </section>
+  </section>
 {% endblock %}

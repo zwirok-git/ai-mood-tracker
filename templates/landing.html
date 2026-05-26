@@ -1,76 +1,76 @@
 {% extends "base.html" %}
 {% block title %}Mood Tracker{% endblock %}
 {% block content %}
-    {% include "includes/navbar.html" %}
-    <section class="hero">
-        <div class="hero-content">
-            <span class="eyebrow">UNDERSTAND YOUR INNER WORLD</span>
-            <h1 class="hero-title">Mood Tracker</h1>
-            <p class="hero-text">
-                A private space to reflect,
-                observe emotional patterns,
-                and continue writing.
-            </p>
-            <div class="hero-actions">
-                <a href="#journal" class="primary-btn">Start your journey →</a>
-                <a href="#reflection" class="secondary-btn">Learn more ↓</a>
-            </div>
-            <div class="hero-footer">Designed by Oleksii Prokopenko</div>
+  {% include "includes/navbar.html" %}
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">UNDERSTAND YOUR INNER WORLD</span>
+      <h1 class="hero-title">Mood Tracker</h1>
+      <p class="hero-text">
+        A private space to reflect,
+        observe emotional patterns,
+        and continue writing.
+      </p>
+      <div class="hero-actions">
+        <a href="#journal" class="primary-btn">Start your journey →</a>
+        <a href="#reflection" class="secondary-btn">Learn more ↓</a>
+      </div>
+      <div class="hero-footer">Designed by Oleksii Prokopenko</div>
+    </div>
+  </section>
+  <!-- JOURNAL -->
+  <section id="journal" class="section split">
+    <div>
+      <div class="section-id">01</div>
+      <h2>Journal</h2>
+      <p>
+        Write freely.
+        Capture thoughts,
+        emotions,
+        and daily experiences.
+      </p>
+      <a href="{% url "journal:journal-entry-list" %}" class="secondary-btn">Explore journal →</a>
+    </div>
+    <div class="glass-card">
+      <div class="card-title">How are you feeling today?</div>
+      <div class="entry-preview">
+        Today felt slower.
+        I noticed I stayed
+        with my thoughts
+        instead of reacting.
+      </div>
+      <div class="card-bottom">
+        <div class="chips">
+          <span>Calm</span>
+          <span>Curious</span>
+          <span>Grounded</span>
         </div>
-    </section>
-    <!-- JOURNAL -->
-    <section id="journal" class="section split">
+        <button class="primary-btn">Save reflection</button>
+      </div>
+    </div>
+  </section>
+  <!-- AI -->
+  <section id="reflection" class="section split">
+    <div>
+      <div class="section-id">02</div>
+      <h2>AI Reflection</h2>
+      <p>
+        AI notices patterns.
+        You decide what they mean.
+      </p>
+      <a href="#journal" class="secondary-btn">See how it works →</a>
+    </div>
+    <div class="glass-card">
+      <div class="ai-row">
+        <div class="reflection-mark">✨</div>
         <div>
-            <div class="section-id">01</div>
-            <h2>Journal</h2>
-            <p>
-                Write freely.
-                Capture thoughts,
-                emotions,
-                and daily experiences.
-            </p>
-            <a href="{% url "journal:journal-entry-list" %}" class="secondary-btn">Explore journal →</a>
+          You tend to write
+          more slowly during evenings.
+          Recent reflections
+          feel calmer and longer.
         </div>
-        <div class="glass-card">
-            <div class="card-title">How are you feeling today?</div>
-            <div class="entry-preview">
-                Today felt slower.
-                I noticed I stayed
-                with my thoughts
-                instead of reacting.
-            </div>
-            <div class="card-bottom">
-                <div class="chips">
-                    <span>Calm</span>
-                    <span>Curious</span>
-                    <span>Grounded</span>
-                </div>
-                <button class="primary-btn">Save reflection</button>
-            </div>
-        </div>
-    </section>
-    <!-- AI -->
-    <section id="reflection" class="section split">
-        <div>
-            <div class="section-id">02</div>
-            <h2>AI Reflection</h2>
-            <p>
-                AI notices patterns.
-                You decide what they mean.
-            </p>
-            <a href="#journal" class="secondary-btn">See how it works →</a>
-        </div>
-        <div class="glass-card">
-            <div class="ai-row">
-                <div class="reflection-mark">✨</div>
-                <div>
-                    You tend to write
-                    more slowly during evenings.
-                    Recent reflections
-                    feel calmer and longer.
-                </div>
-            </div>
-            <button class="secondary-btn">Generate insight</button>
-        </div>
-    </section>
+      </div>
+      <button class="secondary-btn">Generate insight</button>
+    </div>
+  </section>
 {% endblock %}

@@ -1,38 +1,38 @@
 {% extends "base.html" %}
 {% block title %}Confirm Email{% endblock %}
 {% block content %}
-    {% include "includes/navbar.html" %}
-    <section class="login-layout">
-        <section class="login-copy">
-            <h1>
-                Confirm
-                <br>
-                email.
-            </h1>
-            <p>
-                This keeps your journal account
-                connected to a real inbox
-                you control.
-            </p>
-        </section>
-        <section class="login-panel">
-            <div class="login-form">
-                {% if confirmation %}
-                    <h2>Email confirmed</h2>
-                    <p class="account-note">
-                        Your email address is verified.
-                        You can continue to your journal.
-                    </p>
-                    <a href="{% url "journal:journal-entry-list" %}" class="primary-btn">Open journal →</a>
-                {% else %}
-                    <h2>Link expired</h2>
-                    <p class="account-note">
-                        This confirmation link is no longer valid.
-                        Sign in to request a fresh email.
-                    </p>
-                    <a href="{% url "login" %}" class="primary-btn">Back to sign in →</a>
-                {% endif %}
-            </div>
-        </section>
+  {% include "includes/navbar.html" %}
+  <section class="login-layout">
+    <section class="login-copy">
+      <h1>
+        Confirm
+        <br>
+        email.
+      </h1>
+      <p>
+        This keeps your journal account
+        connected to a real inbox
+        you control.
+      </p>
     </section>
+    <section class="login-panel">
+      <div class="login-form">
+        {% if confirmation %}
+          <h2>Email confirmed</h2>
+          <p class="account-note">
+            Your email address is verified.
+            You can continue to your journal.
+          </p>
+          <a href="{% url "journal:journal-entry-list" %}" class="primary-btn">Open journal →</a>
+        {% else %}
+          <h2>Link expired</h2>
+          <p class="account-note">
+            This confirmation link is no longer valid.
+            Sign in to request a fresh email.
+          </p>
+          <a href="{% url "login" %}" class="primary-btn">Back to sign in →</a>
+        {% endif %}
+      </div>
+    </section>
+  </section>
 {% endblock %}

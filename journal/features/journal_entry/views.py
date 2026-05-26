@@ -1,9 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy, reverse
-from django.views import generic
+from django.views import generic, View
+from django.views.generic import TemplateView
 
 from journal.forms import JournalEntryForm
 from journal.models import JournalEntry
+from journal.services.insight_service.insight_service import InsightService
 
 
 class JournalEntryListView(LoginRequiredMixin, generic.ListView):
@@ -57,3 +60,35 @@ class JournalEntryDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.De
 
     def test_func(self):
         return self.get_object().user == self.request.user
+
+
+
+
+
+#HTMX views
+
+
+class GenerateInsightView(LoginRequiredMixin, View):
+
+    def post( self, request, pk):
+        entry = (
+            get_object_or_404(
+                JournalEntry,
+                pk=pk,
+                user=request.user,
+            )
+        )
+
+        insight = (
+            InsightService()
+            .generate_insight(entry)
+        )
+
+        return render(
+            request,
+            "htmx_components/insight_section.html",
+            {
+                "entry": entry,
+                "insight": insight,
+            },
+        )

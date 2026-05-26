@@ -18,7 +18,7 @@
         <p>{{ object.title }}</p>
         <div class="profile-actions">
           <button type="submit" class="danger-btn">Delete forever</button>
-          <a href="{% url 'journal:entry' object.id %}" class="primary-btn">Cancel</a>
+          <a href="{% url "journal:entry" object.id %}" class="primary-btn">Cancel</a>
         </div>
       </form>
     </section>

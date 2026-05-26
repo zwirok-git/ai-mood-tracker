@@ -1,0 +1,30 @@
+{% if object.ai_insight %}
+  <h1>
+    AI
+    <br>
+    reflection.
+  </h1>
+  <p>
+    Generated today ✨
+    <br>
+    Regenerate to refresh insights.
+  </p>
+{% else %}
+  <h1>
+    Create
+    <br>
+    insight.
+  </h1>
+  <p>
+    No reflection yet.
+    <br>
+    Generate one and discover patterns.
+  </p>
+  <form hx-post="{% url "journal:entry-generate-insight" entry.id %}"
+        hx-target="#insight-container"
+        hx-swap="outerHTML">
+    {% csrf_token %}
+    <button type="submit" class="primary-btn" hx-disabled-elt="button">Generate insight ✨</button>
+    <small class="htmx-indicator">Generating...</small>
+  </form>
+{% endif %}

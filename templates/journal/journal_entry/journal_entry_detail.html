@@ -3,37 +3,8 @@
 {% block content %}
   {% include "includes/navbar.html" %}
   <section class="login-layout">
-    <section class="login-copy">
-      {% if object.ai_insight %}
-        <h1>
-          AI
-          <br>
-          reflection.
-        </h1>
-        <p>
-          Generated today ✨
-          <br>
-          Open the card to read.
-        </p>
-      {% else %}
-        <h1>
-          Create
-          <br>
-          insight.
-        </h1>
-        <p>
-          No reflection yet.
-          <br>
-          Generate one and discover patterns.
-        </p>
-        <form hx-post="{% url "journal:entry-generate-insight" object.id %}"
-              hx-target="#insight-container"
-              hx-swap="innerHTML">
-          {% csrf_token %}
-          <button type="submit"  class="primary-btn"  hx-disabled-elt="this">Generate insight ✨</button>
-          <small class="htmx-indicator">Generating...</small>
-        </form>
-      {% endif %}
+    <section class="login-copy" id="insight-state">
+      {% include "htmx_components/insight_state.html" with entry=object %}
     </section>
     <section class="login-panel">
       <article class="entry-card entry-detail-card">

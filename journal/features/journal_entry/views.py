@@ -84,9 +84,11 @@ class GenerateInsightView(LoginRequiredMixin, View):
 
         insight = InsightService().generate_insight(entry)
 
+        entry.refresh_from_db()
+
         return render(
             request,
-            "htmx_components/insight_section.html",
+            "htmx_components/insight_generation_result.html",
             {
                 "entry": entry,
                 "insight": insight,

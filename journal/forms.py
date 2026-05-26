@@ -1,7 +1,7 @@
 from django import forms
 from allauth.account.forms import SignupForm
 from django.contrib.auth.forms import AuthenticationForm
-from journal.models import JournalEntry
+from journal.models import JournalEntry, MoodTag
 
 
 class UserLoginForm (AuthenticationForm):
@@ -22,6 +22,11 @@ class UserSignupForm(SignupForm):
 
 
 class JournalEntryForm(forms.ModelForm):
+    tags = forms.ModelMultipleChoiceField(
+        queryset=MoodTag.objects.all(),
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+    )
 
     class Meta:
         model = JournalEntry
@@ -30,4 +35,5 @@ class JournalEntryForm(forms.ModelForm):
             "title",
             "content",
             "mood_score",
+            "tags",
         )

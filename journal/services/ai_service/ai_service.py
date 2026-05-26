@@ -1,8 +1,7 @@
 import json
-from typing import Any
 
 from journal.services.ai_service.ai_variables import (
-    SYSTEM_MESSAGE,
+    GPT_OSS_SYSTEM_MESSAGE,
     LLMClient,
     LLM_MODEL,
     TEMPERATURE,
@@ -13,9 +12,16 @@ from journal.services.ai_service.client import CLIENT
 
 
 class AIService:
+
+    """
+    Service for interacting with configured LLM backends.
+    Currently tuned for OpenAI GPT-OSS models.
+    (openai/gpt-oss-120b, openai/gpt-oss-20b)
+    """
+
     def __init__(
             self,
-            system_message: str = SYSTEM_MESSAGE,
+            system_message: str = GPT_OSS_SYSTEM_MESSAGE,
             client: LLMClient = CLIENT,
             llm_model: str = LLM_MODEL,
             temperature: float = TEMPERATURE,
@@ -34,6 +40,11 @@ class AIService:
         self._user_role_name = user_role_name
 
     def _format_input(self, user_input: dict) -> str:
+
+        """
+        Convert a structured input into a formatted JSON string.
+        """
+
         return json.dumps(
             user_input,
             ensure_ascii=False,
@@ -42,6 +53,13 @@ class AIService:
 
 
     def _build_prompt(self, user_input: dict) -> dict:
+
+        """
+        Take user_input for formatting
+        and return the payload for *.chat.completions.create()
+        """
+
+
         prompt = {
             "model": self._llm_model,
             "messages": [
@@ -61,7 +79,24 @@ class AIService:
 
         return prompt
 
-    def send(self, user_input: dict) -> Any:
-        completion = self._client.chat.completions.create(**self._build_prompt(user_input))
+    def send(self, user_input: dict, llm_model: str | None = None) -> str:
 
-        return completion
+        """
+        Send a prompt to LLM and return completion.
+        """
+
+        prompt = self._build_prompt(user_input)
+
+        if llm_model:
+            prompt["model"] = llm_model
+
+        completion = self._client.chat.completions.create(**prompt)
+
+
+
+        return  json.loads(
+            completion
+            .choices[0]
+            .message
+            .content
+        )

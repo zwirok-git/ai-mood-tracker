@@ -39,9 +39,7 @@
               {% if entry.tags.all %}
                 <div class="entry-tags">
                   {% for tag in entry.tags.all %}
-                    <span class="mood-pill"
-                          style="border-color: {{ tag.color }};
-                                 color: {{ tag.color }}">
+                    <span class="mood-pill entry-tag" style="--tag-color: {{ tag.color }}">
                       {{ tag.emoji }}
                       {{ tag.name }}
                     </span>
@@ -51,6 +49,7 @@
               <a href="{% url "journal:entry" entry.id %}" class="entry-link">Read →</a>
             </article>
           {% endfor %}
+          {% include "includes/pagination.html" %}
         {% else %}
           <section class="empty-state">
             <h2>✨ Your journal is empty</h2>

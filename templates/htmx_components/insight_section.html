@@ -1,0 +1,28 @@
+<details class="insight-card">
+  <summary>
+    <div class="insight-header">
+      <div>
+        <strong>AI Reflection</strong>
+        <small>Click to expand</small>
+      </div>
+      <span>✨</span>
+    </div>
+  </summary>
+  <section class="insight-body">
+    <div class="insight-content">
+      <h3>Summary</h3>
+      <p>{{ insight.summary }}</p>
+      <h3>Recommendations</h3>
+      <p>{{ insight.recommendations }}</p>
+    </div>
+  </section>
+</details>
+<div class="insight-actions">
+  <form hx-post="{% url "journal:entry-generate-insight" insight.journal_entry.id %}"
+        hx-target="#insight-container"
+        hx-swap="innerHTML">
+    {% csrf_token %}
+    <button type="submit"  class="secondary-btn"  hx-disabled-elt="this">Regenerate ↻</button>
+    <small class="htmx-indicator">Regenerating...</small>
+  </form>
+</div>

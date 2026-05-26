@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+
 
 
 class User(AbstractUser):
@@ -9,17 +11,9 @@ class User(AbstractUser):
             "-last_login",
         ]
 
-
-class AIStatus(models.TextChoices):
-    PENDING = "PENDING", "Pending"
-    PROCESSING = "PROCESSING", "Processing"
-    COMPLETE = "COMPLETE", "Complete"
-    FAILED = "FAILED", "Failed"
-
-
 class JournalEntry(models.Model):
     user = models.ForeignKey(
-        to=User,
+        to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="entries",
     )
@@ -37,12 +31,6 @@ class JournalEntry(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    ai_status = models.CharField(
-        max_length=20,
-        choices=AIStatus,
-        default=AIStatus.PENDING
-    )
 
     class Meta:
         ordering = ["-created_at"]
@@ -69,9 +57,22 @@ class AIInsight(models.Model):
     )
 
     summary = models.TextField()
-
-    emotions = models.JSONField(default=dict)
-
     recommendations = models.TextField()
-
     created_at = models.DateTimeField(auto_now_add=True)
+
+    emotions = models.JSONField(default=list)
+
+
+class ReflectionSnapshot(models.Model):
+    user = models.OneToOneField(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="reflection"
+    )
+
+    summary = models.TextField()
+    average_mood = models.FloatField()
+    entries_count = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    top_emotions = models.JSONField(default=list)

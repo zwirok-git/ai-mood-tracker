@@ -12,8 +12,8 @@ from journal.services.insight_service.insight_service import InsightService
 class JournalEntryListView(LoginRequiredMixin, generic.ListView):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_list.html"
-    paginate_by = 10
-
+    paginate_by = 2
+    
     def get_queryset(self):
         return JournalEntry.objects.filter(user=self.request.user)
 

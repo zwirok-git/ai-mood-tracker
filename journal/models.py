@@ -4,12 +4,12 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
-
 class User(AbstractUser):
     class Meta:
         ordering = [
             "-last_login",
         ]
+
 
 class JournalEntry(models.Model):
     user = models.ForeignKey(
@@ -45,7 +45,9 @@ class JournalEntry(models.Model):
 class MoodTag(models.Model):
     name = models.CharField(max_length=255, unique=True)
     color = models.CharField(max_length=7)
-    emoji = models.CharField(max_length=32,)
+    emoji = models.CharField(
+        max_length=32,
+    )
 
     class Meta:
         ordering = ["name"]
@@ -70,9 +72,7 @@ class AIInsight(models.Model):
 
 class ReflectionSnapshot(models.Model):
     user = models.OneToOneField(
-        to=settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="reflection"
+        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reflection"
     )
 
     summary = models.TextField()

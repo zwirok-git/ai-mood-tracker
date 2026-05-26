@@ -10,7 +10,7 @@ class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView
     template_name = "journal/user/user_detail.html"
 
     def test_func(self):
-        return  self.request.user == self.get_object()
+        return self.request.user == self.get_object()
 
 
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
@@ -25,7 +25,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
     success_url = "/"
 
     def test_func(self):
-        return  self.request.user == self.get_object()
+        return self.request.user == self.get_object()
 
 
 class UserCreateView(SignupView):
@@ -38,4 +38,4 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
     success_url = reverse_lazy("home")
 
     def test_func(self):
-        return  self.request.user == self.get_object()
+        return self.request.user == self.get_object()

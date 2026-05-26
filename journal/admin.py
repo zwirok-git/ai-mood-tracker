@@ -8,4 +8,5 @@ from journal.models import MoodTag
 class UserAdmin(admin.ModelAdmin):
     pass
 
+
 admin.site.register(MoodTag)

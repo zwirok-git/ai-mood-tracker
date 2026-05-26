@@ -6,20 +6,18 @@ from journal.services.ai_service.ai_service import AIService
 
 
 class InsightService:
-
     """
     Generates AI Insight from journal entries
     """
 
-    def __init__(self,ai_service: type[AIService] = AIService) -> None:
+    def __init__(self, ai_service: type[AIService] = AIService) -> None:
         self._ai_service = ai_service()
 
-
     def generate_insight(
-            self,
-            entry: JournalEntry,
-            regenerate: bool = False,
-            llm_model: str | None = None
+        self,
+        entry: JournalEntry,
+        regenerate: bool = False,
+        llm_model: str | None = None,
     ) -> AIInsight:
         response = self._ai_service.send(
             user_input={
@@ -32,13 +30,7 @@ class InsightService:
 
         with transaction.atomic():
 
-            locked = (
-                JournalEntry.objects
-                .select_for_update()
-                .get(
-                    pk=entry.pk
-                )
-            )
+            locked = JournalEntry.objects.select_for_update().get(pk=entry.pk)
 
             if not regenerate and hasattr(locked, "ai_insight"):
                 return locked.ai_insight
@@ -46,10 +38,10 @@ class InsightService:
             insight, _ = AIInsight.objects.update_or_create(
                 journal_entry=entry,
                 defaults={
-                   "summary": response["summary"],
-                   "emotions": response["emotions"],
-                   "recommendations": response["recommendations"]
-                }
+                    "summary": response["summary"],
+                    "emotions": response["emotions"],
+                    "recommendations": response["recommendations"],
+                },
             )
 
         return insight

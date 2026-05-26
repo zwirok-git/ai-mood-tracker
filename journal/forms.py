@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from journal.models import JournalEntry, MoodTag
 
 
-class UserLoginForm (AuthenticationForm):
+class UserLoginForm(AuthenticationForm):
     pass
 
 

@@ -6,13 +6,12 @@ from journal.services.ai_service.ai_variables import (
     LLM_MODEL,
     TEMPERATURE,
     TOP_P,
-    REASONING_EFFORT
+    REASONING_EFFORT,
 )
 from journal.services.ai_service.client import CLIENT
 
 
 class AIService:
-
     """
     Service for interacting with configured LLM backends.
     Currently tuned for OpenAI GPT-OSS models.
@@ -20,15 +19,15 @@ class AIService:
     """
 
     def __init__(
-            self,
-            system_message: str = GPT_OSS_SYSTEM_MESSAGE,
-            client: LLMClient = CLIENT,
-            llm_model: str = LLM_MODEL,
-            temperature: float = TEMPERATURE,
-            top_p: float = TOP_P,
-            reasoning_effort: str = REASONING_EFFORT,
-            system_role_name: str = "system",
-            user_role_name: str = "user",
+        self,
+        system_message: str = GPT_OSS_SYSTEM_MESSAGE,
+        client: LLMClient = CLIENT,
+        llm_model: str = LLM_MODEL,
+        temperature: float = TEMPERATURE,
+        top_p: float = TOP_P,
+        reasoning_effort: str = REASONING_EFFORT,
+        system_role_name: str = "system",
+        user_role_name: str = "user",
     ) -> None:
         self._system_message = system_message
         self._client = client
@@ -40,25 +39,17 @@ class AIService:
         self._user_role_name = user_role_name
 
     def _format_input(self, user_input: dict) -> str:
-
         """
         Convert a structured input into a formatted JSON string.
         """
 
-        return json.dumps(
-            user_input,
-            ensure_ascii=False,
-            indent=2
-        )
-
+        return json.dumps(user_input, ensure_ascii=False, indent=2)
 
     def _build_prompt(self, user_input: dict) -> dict:
-
         """
         Take user_input for formatting
         and return the payload for *.chat.completions.create()
         """
-
 
         prompt = {
             "model": self._llm_model,
@@ -80,7 +71,6 @@ class AIService:
         return prompt
 
     def send(self, user_input: dict, llm_model: str | None = None) -> str:
-
         """
         Send a prompt to LLM and return completion.
         """
@@ -92,11 +82,4 @@ class AIService:
 
         completion = self._client.chat.completions.create(**prompt)
 
-
-
-        return  json.loads(
-            completion
-            .choices[0]
-            .message
-            .content
-        )
+        return json.loads(completion.choices[0].message.content)

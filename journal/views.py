@@ -16,7 +16,3 @@ class IndexView(generic.TemplateView):
 class UserLoginView(LoginView):
     form_class = UserLoginForm
     template_name = "registration/login.html"
-
-
-
-

@@ -23,5 +23,5 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("", include("journal.urls")),
     path("profile/", include("journal.features.account.urls")),
-    path("journal/", include("journal.features.journal_entry.urls"))
+    path("journal/", include("journal.features.journal_entry.urls")),
 ]

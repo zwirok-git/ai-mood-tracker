@@ -1,6 +1,5 @@
 from groq import Groq
 
-
 LLMClient = Groq
 
 TEMPERATURE = 0.9

@@ -15,7 +15,9 @@ class JournalEntryListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 2
 
     def get_queryset(self):
-        return JournalEntry.objects.filter(user=self.request.user).prefetch_related("tags")
+        return JournalEntry.objects.filter(user=self.request.user).prefetch_related(
+            "tags"
+        )
 
 
 class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
@@ -24,13 +26,18 @@ class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "journal/journal_entry/journal_entry_form.html"
     success_url = reverse_lazy("journal:journal-entry-list")
 
-    def form_valid(self, form,):
+    def form_valid(
+        self,
+        form,
+    ):
         form.instance.user = self.request.user
 
         return super().form_valid(form)
 
 
-class JournalEntryUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+class JournalEntryUpdateView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
+):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_form.html"
     form_class = JournalEntryForm
@@ -42,7 +49,9 @@ class JournalEntryUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.Up
         return self.get_object().user == self.request.user
 
 
-class JournalEntryDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class JournalEntryDeleteView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
+):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_delete.html"
     success_url = reverse_lazy("journal:journal-entry-list")
@@ -51,7 +60,9 @@ class JournalEntryDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.De
         return self.get_object().user == self.request.user
 
 
-class JournalEntryDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
+class JournalEntryDetailView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.DetailView
+):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_detail.html"
 
@@ -59,18 +70,16 @@ class JournalEntryDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.De
         return self.get_object().user == self.request.user
 
 
-#HTMX views
+# HTMX views
 
 
 class GenerateInsightView(LoginRequiredMixin, View):
 
-    def post( self, request, pk):
-        entry = (
-            get_object_or_404(
-                JournalEntry,
-                pk=pk,
-                user=request.user,
-            )
+    def post(self, request, pk):
+        entry = get_object_or_404(
+            JournalEntry,
+            pk=pk,
+            user=request.user,
         )
 
         insight = InsightService().generate_insight(entry)

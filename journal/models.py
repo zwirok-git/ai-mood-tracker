@@ -29,6 +29,12 @@ class JournalEntry(models.Model):
         help_text="0 = very low, 10 = excellent",
     )
 
+    tags = models.ManyToManyField(
+        to="MoodTag",
+        related_name="entries",
+        blank=True,
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -38,7 +44,6 @@ class JournalEntry(models.Model):
 
 class MoodTag(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    journal_entry = models.ManyToManyField(to=JournalEntry, related_name="tags", blank=True)
     color = models.CharField(max_length=7)
     emoji = models.CharField(max_length=32,)
 

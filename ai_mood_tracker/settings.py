@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_htmx",
     "allauth",
     "allauth.account",
+    "anymail",
     "journal",
 ]
 
@@ -148,16 +149,29 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-EMAIL_BACKEND = os.environ.get(
-    "EMAIL_BACKEND",
-    "django.core.mail.backends.console.EmailBackend",
-)
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "Mood Tracker <noreply@example.com>")
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "anymail.backends.resend.EmailBackend")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "AI Mood Tracker <onboarding@resend.dev>")
+
+ANYMAIL = {
+    "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
+}
 
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
 ACCOUNT_FORMS = {"signup": "journal.forms.UserSignupForm"}
 ACCOUNT_LOGIN_METHODS = {"username", "email"}
-ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*", "password2*", "first_name*", "last_name*"]
+ACCOUNT_SIGNUP_FIELDS = [
+    "username*",
+    "email*",
+    "password1*",
+    "password2*",
+    "first_name*",
+    "last_name*"
+]
+
 ACCOUNT_LOGIN_ON_SIGNUP = False
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True

@@ -51,6 +51,17 @@
             {% for error in field.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
           </div>
         {% endfor %}
+        <div class="form-group">
+          <div class="tag-picker">
+            {% for checkbox in form.tags %}
+              <label class="tag-pill tag-option"
+                     style="--tag-color:{{ checkbox.data.value.instance.color }}">
+                {{ checkbox.tag }}
+                {{ checkbox.choice_label }}
+              </label>
+            {% endfor %}
+          </div>
+        </div>
         <div class="profile-actions">
           <button type="submit"  class="primary-btn">
             {% if object %}

@@ -47,9 +47,7 @@
         {% if object.tags.all %}
           <div class="entry-tags">
             {% for tag in object.tags.all %}
-              <span class="mood-pill"
-                    style="border-color: {{ tag.color }};
-                           color: {{ tag.color }}">
+              <span class="mood-pill entry-tag" style="--tag-color: {{ tag.color }}">
                 {{ tag.emoji }}
                 {{ tag.name }}
               </span>

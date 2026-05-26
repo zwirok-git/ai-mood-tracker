@@ -29,10 +29,10 @@ class JournalEntry(models.Model):
 
     mood_score = models.PositiveSmallIntegerField(
         validators=[
-            MinValueValidator(1),
+            MinValueValidator(0),
             MaxValueValidator(10),
         ],
-        help_text="1 = very low, 10 = excellent"
+        help_text="0 = very low, 10 = excellent",
     )
 
     created_at = models.DateTimeField(auto_now_add=True)

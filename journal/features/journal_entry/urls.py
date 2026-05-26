@@ -6,6 +6,7 @@ from journal.features.journal_entry.views import (
     JournalEntryDetailView,
     JournalEntryUpdateView,
     JournalEntryDeleteView,
+    GenerateInsightView,
 )
 
 
@@ -18,6 +19,10 @@ urlpatterns = [
     path("entry/<int:pk>/", JournalEntryDetailView.as_view(), name="entry"),
     path("entry/<int:pk>/edit/", JournalEntryUpdateView.as_view(), name="entry-edit"),
     path("entry/<int:pk>/delete/", JournalEntryDeleteView.as_view(), name="entry-delete"),
+
+    # htmx-urls
+
+    path("<int:pk>/generate/", GenerateInsightView.as_view(), name="entry-generate-insight")
 ]
 
 

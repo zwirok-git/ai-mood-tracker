@@ -45,7 +45,7 @@ EMAIL_BACKEND = (
 )
 
 DEFAULT_FROM_EMAIL = (
-    "AI Mood Tracker <noreply@aimoodtracker.site>"
+    "AI Mood Tracker <noreply@ai-mood-tracker.site>"
 )
 
 ANYMAIL = {

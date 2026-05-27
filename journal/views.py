@@ -86,7 +86,12 @@ class GenerateInsightView(LoginRequiredMixin, View):
             user=request.user,
         )
 
-        insight = InsightService().generate_insight(entry)
+        regenerate = request.POST.get("regenerate") == "true"
+
+        insight = InsightService().generate_insight(
+            entry=entry,
+            regenerate=regenerate
+        )
 
         entry.refresh_from_db()
 

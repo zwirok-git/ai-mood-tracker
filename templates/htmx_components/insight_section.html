@@ -22,6 +22,7 @@
         hx-target="#insight-container"
         hx-swap="innerHTML">
     {% csrf_token %}
+    <input type="hidden" name="regenerate" value="true">
     <button type="submit"  class="secondary-btn"  hx-disabled-elt="this">Regenerate ↻</button>
     <small class="htmx-indicator">Regenerating...</small>
   </form>

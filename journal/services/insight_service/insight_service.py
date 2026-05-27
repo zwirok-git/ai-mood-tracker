@@ -36,7 +36,7 @@ class InsightService:
                 return locked.ai_insight
 
             insight, _ = AIInsight.objects.update_or_create(
-                journal_entry=entry,
+                journal_entry=locked,
                 defaults={
                     "summary": response["summary"],
                     "emotions": response["emotions"],

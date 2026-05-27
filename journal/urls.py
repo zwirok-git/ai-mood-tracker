@@ -1,13 +1,29 @@
-from django.contrib.auth.views import LogoutView
 from django.urls import path
 
-from journal.features.account.views import UserCreateView
-from journal.views import UserLoginView, IndexView
+from journal.views import (
+    JournalEntryListView,
+    JournalEntryCreateView,
+    JournalEntryDetailView,
+    JournalEntryUpdateView,
+    JournalEntryDeleteView,
+    GenerateInsightView,
+)
+
+app_name = "journal"
+
 
 urlpatterns = [
-    path("login/", UserLoginView.as_view(), name="login"),
-    path("logout/", LogoutView.as_view(), name="logout"),
-    path("register/", UserCreateView.as_view(), name="register"),
-    path("", IndexView.as_view(), name="home"),
-    # HTMX-urls
+    path("journal/", JournalEntryListView.as_view(), name="journal-entry-list"),
+    path("entry/create/", JournalEntryCreateView.as_view(), name="entry-create"),
+    path("entry/<int:pk>/", JournalEntryDetailView.as_view(), name="entry"),
+    path("entry/<int:pk>/edit/", JournalEntryUpdateView.as_view(), name="entry-edit"),
+    path(
+        "entry/<int:pk>/delete/", JournalEntryDeleteView.as_view(), name="entry-delete"
+    ),
+    # htmx-urls
+    path(
+        "<int:pk>/generate/",
+        GenerateInsightView.as_view(),
+        name="entry-generate-insight",
+    ),
 ]

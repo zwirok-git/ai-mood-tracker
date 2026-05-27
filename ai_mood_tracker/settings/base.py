@@ -25,11 +25,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "django_htmx",
     "allauth",
     "allauth.account",
     "anymail",
+
     "journal",
+    "users"
 ]
 
 
@@ -137,7 +140,7 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
 
 
-AUTH_USER_MODEL = "journal.User"
+AUTH_USER_MODEL = "users.User"
 
 
 AUTHENTICATION_BACKENDS = [

@@ -1,18 +1,96 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.views import LoginView
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views import generic
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy, reverse
+from django.views import generic, View
+from django.views.generic import TemplateView
 
-from journal.forms import UserLoginForm
+from journal.forms import JournalEntryForm
 from journal.models import JournalEntry
+from journal.services.insight_service.insight_service import InsightService
 
 
-class IndexView(generic.TemplateView):
-    template_name = "landing.html"
+class JournalEntryListView(LoginRequiredMixin, generic.ListView):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_list.html"
+    paginate_by = 2
+
+    def get_queryset(self):
+        return JournalEntry.objects.filter(user=self.request.user).prefetch_related(
+            "tags"
+        )
 
 
-class UserLoginView(LoginView):
-    form_class = UserLoginForm
-    template_name = "registration/login.html"
+class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
+    model = JournalEntry
+    form_class = JournalEntryForm
+    template_name = "journal/journal_entry/journal_entry_form.html"
+    success_url = reverse_lazy("journal:journal-entry-list")
+
+    def form_valid(
+        self,
+        form,
+    ):
+        form.instance.user = self.request.user
+
+        return super().form_valid(form)
+
+
+class JournalEntryUpdateView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
+):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_form.html"
+    form_class = JournalEntryForm
+
+    def get_success_url(self):
+        return reverse("journal:entry", args=[self.object.pk])
+
+    def test_func(self):
+        return self.get_object().user == self.request.user
+
+
+class JournalEntryDeleteView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
+):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_delete.html"
+    success_url = reverse_lazy("journal:journal-entry-list")
+
+    def test_func(self):
+        return self.get_object().user == self.request.user
+
+
+class JournalEntryDetailView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.DetailView
+):
+    model = JournalEntry
+    template_name = "journal/journal_entry/journal_entry_detail.html"
+
+    def test_func(self):
+        return self.get_object().user == self.request.user
+
+
+# HTMX views
+
+
+class GenerateInsightView(LoginRequiredMixin, View):
+
+    def post(self, request, pk):
+        entry = get_object_or_404(
+            JournalEntry,
+            pk=pk,
+            user=request.user,
+        )
+
+        insight = InsightService().generate_insight(entry)
+
+        entry.refresh_from_db()
+
+        return render(
+            request,
+            "htmx_components/insight_generation_result.html",
+            {
+                "entry": entry,
+                "insight": insight,
+            },
+        )

@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "anymail",
 
     "journal",
-    "users"
+    "users",
 ]
 
 
@@ -133,11 +133,11 @@ STATICFILES_DIRS = [
 ]
 
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "account:login"
 
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "journal:home"
 
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "account:login"
 
 
 AUTH_USER_MODEL = "users.User"
@@ -152,7 +152,7 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 ACCOUNT_FORMS = {
-    "signup": "journal.forms.UserSignupForm",
+    "signup": "users.forms.UserSignupForm",
 }
 
 ACCOUNT_LOGIN_METHODS = {

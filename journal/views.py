@@ -70,6 +70,10 @@ class JournalEntryDetailView(
         return self.get_object().user == self.request.user
 
 
+class IndexView(generic.TemplateView):
+    template_name = "landing.html"
+
+
 # HTMX views
 
 

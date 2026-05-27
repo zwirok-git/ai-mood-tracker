@@ -44,10 +44,6 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
         return self.request.user == self.get_object()
 
 
-class IndexView(generic.TemplateView):
-    template_name = "landing.html"
-
-
 class UserLoginView(LoginView):
     form_class = UserLoginForm
     template_name = "registration/login.html"

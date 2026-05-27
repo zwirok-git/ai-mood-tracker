@@ -7,6 +7,7 @@ from journal.views import (
     JournalEntryUpdateView,
     JournalEntryDeleteView,
     GenerateInsightView,
+    IndexView,
 )
 
 app_name = "journal"
@@ -20,6 +21,7 @@ urlpatterns = [
     path(
         "entry/<int:pk>/delete/", JournalEntryDeleteView.as_view(), name="entry-delete"
     ),
+    path("", IndexView.as_view(), name="home"),
     # htmx-urls
     path(
         "<int:pk>/generate/",

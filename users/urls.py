@@ -7,7 +7,6 @@ from users.views import (
     UserDeleteView,
     UserLoginView,
     UserCreateView,
-    IndexView,
 )
 
 app_name = "account"
@@ -20,5 +19,4 @@ urlpatterns = [
     path("login/", UserLoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("register/", UserCreateView.as_view(), name="register"),
-    path("", IndexView.as_view(), name="home"),
 ]

@@ -6,7 +6,6 @@ from journal.models import (
     MoodTag,
 )
 
-
 User = get_user_model()
 
 

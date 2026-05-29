@@ -2,7 +2,6 @@ import os
 
 from .base import *
 
-
 DEBUG = False
 
 SECURE_SSL_REDIRECT = True
@@ -19,15 +18,12 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
-   ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 DATABASES = {
     "default": {
-        "ENGINE": (
-            "django.db.backends.postgresql"
-        ),
+        "ENGINE": ("django.db.backends.postgresql"),
         "NAME": os.environ["POSTGRES_DB"],
         "USER": os.environ["POSTGRES_USER"],
         "PASSWORD": os.environ["POSTGRES_PASSWORD"],
@@ -40,17 +36,10 @@ DATABASES = {
 }
 
 
-EMAIL_BACKEND = (
-    "anymail.backends.resend.EmailBackend"
-)
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 
-DEFAULT_FROM_EMAIL = (
-    "AI Mood Tracker <noreply@ai-mood-tracker.site>"
-)
+DEFAULT_FROM_EMAIL = "AI Mood Tracker <noreply@ai-mood-tracker.site>"
 
 ANYMAIL = {
-    "RESEND_API_KEY": os.environ[
-        "RESEND_API_KEY"
-    ],
+    "RESEND_API_KEY": os.environ["RESEND_API_KEY"],
 }
-

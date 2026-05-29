@@ -4,7 +4,6 @@ from django.urls import reverse
 
 from journal.models import JournalEntry
 
-
 User = get_user_model()
 
 
@@ -35,11 +34,7 @@ class JournalViewsTests(TestCase):
         )
 
     def test_list_requires_login(self):
-        response = self.client.get(
-            reverse(
-                "journal:journal-entry-list"
-            )
-        )
+        response = self.client.get(reverse("journal:journal-entry-list"))
 
         self.assertEqual(
             response.status_code,
@@ -49,11 +44,7 @@ class JournalViewsTests(TestCase):
     def test_list_page(self):
         self.login()
 
-        response = self.client.get(
-            reverse(
-                "journal:journal-entry-list"
-            )
-        )
+        response = self.client.get(reverse("journal:journal-entry-list"))
 
         self.assertEqual(
             response.status_code,
@@ -64,9 +55,7 @@ class JournalViewsTests(TestCase):
         self.login()
 
         response = self.client.post(
-            reverse(
-                "journal:entry-create"
-            ),
+            reverse("journal:entry-create"),
             {
                 "title": "Created",
                 "content": "Text",
@@ -79,11 +68,7 @@ class JournalViewsTests(TestCase):
             302,
         )
 
-        self.assertTrue(
-            JournalEntry.objects.filter(
-                title="Created"
-            ).exists()
-        )
+        self.assertTrue(JournalEntry.objects.filter(title="Created").exists())
 
     def test_detail_owner_only(self):
         self.login()
@@ -133,8 +118,4 @@ class JournalViewsTests(TestCase):
             302,
         )
 
-        self.assertFalse(
-            JournalEntry.objects.filter(
-                pk=self.entry.pk
-            ).exists()
-        )
+        self.assertFalse(JournalEntry.objects.filter(pk=self.entry.pk).exists())

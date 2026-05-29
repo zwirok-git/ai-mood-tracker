@@ -22,9 +22,7 @@ class JournalEntryFormTests(TestCase):
             }
         )
 
-        self.assertTrue(
-            form.is_valid()
-        )
+        self.assertTrue(form.is_valid())
 
     def test_invalid_mood_score(self):
         form = JournalEntryForm(
@@ -35,6 +33,4 @@ class JournalEntryFormTests(TestCase):
             }
         )
 
-        self.assertFalse(
-            form.is_valid()
-        )
+        self.assertFalse(form.is_valid())

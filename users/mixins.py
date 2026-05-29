@@ -20,7 +20,7 @@ class DemoRestrictedMixin:
             )
 
             return redirect(
-                "account:profile-detail",
+                "account:profile-edit",
                 pk=request.user.pk
             )
 

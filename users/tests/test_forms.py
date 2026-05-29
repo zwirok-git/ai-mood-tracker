@@ -4,7 +4,6 @@ from users.forms import UserSignupForm
 
 
 class UserSignupFormTests(TestCase):
-
     def test_signup_form_saves_names(self):
         client = Client()
 

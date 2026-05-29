@@ -22,7 +22,6 @@ urlpatterns = [
         "entry/<int:pk>/delete/", JournalEntryDeleteView.as_view(), name="entry-delete"
     ),
     path("", IndexView.as_view(), name="home"),
-    # htmx-urls
     path(
         "<int:pk>/generate/",
         GenerateInsightView.as_view(),

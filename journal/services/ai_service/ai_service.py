@@ -12,12 +12,6 @@ from journal.services.ai_service.client import CLIENT
 
 
 class AIService:
-    """
-    Service for interacting with configured LLM backends.
-    Currently tuned for OpenAI GPT-OSS models.
-    (openai/gpt-oss-120b, openai/gpt-oss-20b)
-    """
-
     def __init__(
         self,
         system_message: str = GPT_OSS_SYSTEM_MESSAGE,
@@ -39,18 +33,9 @@ class AIService:
         self._user_role_name = user_role_name
 
     def _format_input(self, user_input: dict) -> str:
-        """
-        Convert a structured input into a formatted JSON string.
-        """
-
         return json.dumps(user_input, ensure_ascii=False, indent=2)
 
     def _build_prompt(self, user_input: dict) -> dict:
-        """
-        Take user_input for formatting
-        and return the payload for *.chat.completions.create()
-        """
-
         prompt = {
             "model": self._llm_model,
             "messages": [
@@ -71,10 +56,6 @@ class AIService:
         return prompt
 
     def send(self, user_input: dict, llm_model: str | None = None) -> str:
-        """
-        Send a prompt to LLM and return completion.
-        """
-
         prompt = self._build_prompt(user_input)
 
         if llm_model:

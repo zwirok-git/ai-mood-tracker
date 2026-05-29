@@ -36,9 +36,7 @@ class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class JournalEntryUpdateView(
-    LoginRequiredMixin,
-    JournalOwnerRequiredMixin,
-    generic.UpdateView
+    LoginRequiredMixin, JournalOwnerRequiredMixin, generic.UpdateView
 ):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_form.html"
@@ -49,9 +47,7 @@ class JournalEntryUpdateView(
 
 
 class JournalEntryDeleteView(
-    LoginRequiredMixin,
-    JournalOwnerRequiredMixin,
-    generic.DeleteView
+    LoginRequiredMixin, JournalOwnerRequiredMixin, generic.DeleteView
 ):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_delete.html"
@@ -59,26 +55,17 @@ class JournalEntryDeleteView(
 
 
 class JournalEntryDetailView(
-    LoginRequiredMixin,
-    JournalOwnerRequiredMixin,
-    generic.DetailView
+    LoginRequiredMixin, JournalOwnerRequiredMixin, generic.DetailView
 ):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_detail.html"
-
-    def test_func(self):
-        return self.get_object().user == self.request.user
 
 
 class IndexView(generic.TemplateView):
     template_name = "landing.html"
 
 
-# HTMX views
-
-
 class GenerateInsightView(LoginRequiredMixin, View):
-
     def post(self, request, pk):
         entry = get_object_or_404(
             JournalEntry,

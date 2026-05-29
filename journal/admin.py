@@ -1,11 +1,6 @@
 from django.contrib import admin
 
-from journal.models import (
-    JournalEntry,
-    MoodTag,
-    AIInsight,
-    ReflectionSnapshot
-)
+from journal.models import JournalEntry, MoodTag, AIInsight, ReflectionSnapshot
 
 
 @admin.register(JournalEntry)
@@ -19,7 +14,10 @@ class JournalEntryAdmin(admin.ModelAdmin):
     )
 
     search_fields = ("title", "content")
-    list_filter = ("mood_score", "created_at",)
+    list_filter = (
+        "mood_score",
+        "created_at",
+    )
 
 
 @admin.register(MoodTag)

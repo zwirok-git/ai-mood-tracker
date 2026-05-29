@@ -14,14 +14,8 @@ class OwnerRequiredMixin(AccessMixin):
 class DemoRestrictedMixin:
     def post(self, request, *args, **kwargs):
         if request.user.email == "test@test.com":
-            messages.error(
-                request,
-                "Test account cannot be modified."
-            )
+            messages.error(request, "Test account cannot be modified.")
 
-            return redirect(
-                "account:profile-edit",
-                pk=request.user.pk
-            )
+            return redirect("account:profile-edit", pk=request.user.pk)
 
         return super().post(request, *args, **kwargs)

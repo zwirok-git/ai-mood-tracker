@@ -6,10 +6,6 @@ from journal.services.ai_service.ai_service import AIService
 
 
 class InsightService:
-    """
-    Generates AI Insight from journal entries
-    """
-
     def __init__(self, ai_service: type[AIService] = AIService) -> None:
         self._ai_service = ai_service()
 
@@ -29,7 +25,6 @@ class InsightService:
         )
 
         with transaction.atomic():
-
             locked = JournalEntry.objects.select_for_update().get(pk=entry.pk)
 
             if not regenerate and hasattr(locked, "ai_insight"):

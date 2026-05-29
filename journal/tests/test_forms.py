@@ -5,7 +5,6 @@ from journal.models import MoodTag
 
 
 class JournalEntryFormTests(TestCase):
-
     def test_form_valid(self):
         tag = MoodTag.objects.create(
             name="Happy",

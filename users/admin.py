@@ -5,6 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 
 User = get_user_model()
 
+
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     list_display = (
@@ -14,4 +15,3 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
         "last_login",
     )
-

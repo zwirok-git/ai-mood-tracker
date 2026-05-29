@@ -11,13 +11,14 @@ class OwnerRequiredMixin(AccessMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class DemoRestrictedMixin(AccessMixin):
-    def dispatch(self, request, *args, **kwargs):
+class DemoRestrictedMixin:
+    def post(self, request, *args, **kwargs):
         if request.user.email == "test@test.com":
             messages.error(
                 request,
-                "Demo account cannot perform this action."
+                "Test account cannot be modified."
             )
-            return redirect("profile-detail", pk=request.user.pk)
 
-        return super().dispatch(request, *args, **kwargs)
+            return redirect("account:profile-detail", request.user.pk)
+
+        return super().post(request, *args, **kwargs)

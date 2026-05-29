@@ -2,11 +2,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy, reverse
 from django.views import generic, View
-from django.views.generic import TemplateView
 
 from journal.forms import JournalEntryForm
 from journal.models import JournalEntry
 from journal.services.insight_service.insight_service import InsightService
+from users.mixins import OwnerRequiredMixin
 
 
 class JournalEntryListView(LoginRequiredMixin, generic.ListView):
@@ -36,7 +36,9 @@ class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class JournalEntryUpdateView(
-    LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
+    LoginRequiredMixin,
+    OwnerRequiredMixin,
+    generic.UpdateView
 ):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_form.html"
@@ -45,23 +47,21 @@ class JournalEntryUpdateView(
     def get_success_url(self):
         return reverse("journal:entry", args=[self.object.pk])
 
-    def test_func(self):
-        return self.get_object().user == self.request.user
-
 
 class JournalEntryDeleteView(
-    LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
+    LoginRequiredMixin,
+    OwnerRequiredMixin,
+    generic.DeleteView
 ):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_delete.html"
     success_url = reverse_lazy("journal:journal-entry-list")
 
-    def test_func(self):
-        return self.get_object().user == self.request.user
-
 
 class JournalEntryDetailView(
-    LoginRequiredMixin, UserPassesTestMixin, generic.DetailView
+    LoginRequiredMixin,
+    OwnerRequiredMixin,
+    generic.DetailView
 ):
     model = JournalEntry
     template_name = "journal/journal_entry/journal_entry_detail.html"
@@ -88,10 +88,7 @@ class GenerateInsightView(LoginRequiredMixin, View):
 
         regenerate = request.POST.get("regenerate") == "true"
 
-        insight = InsightService().generate_insight(
-            entry=entry,
-            regenerate=regenerate
-        )
+        insight = InsightService().generate_insight(entry=entry, regenerate=regenerate)
 
         entry.refresh_from_db()
 

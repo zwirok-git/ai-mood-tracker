@@ -19,6 +19,9 @@ class DemoRestrictedMixin:
                 "Test account cannot be modified."
             )
 
-            return redirect("account:profile-detail", request.user.pk)
+            return redirect(
+                "account:profile-detail",
+                pk=request.user.pk
+            )
 
         return super().post(request, *args, **kwargs)

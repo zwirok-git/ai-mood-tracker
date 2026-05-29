@@ -6,6 +6,17 @@ This project allows users to create journal entries, monitor emotional state ove
 
 ---
 
+## 🌐 Live Demo 
+
+https://ai-mood-tracker.site 
+
+### Test Credentials
+
+Email: test@test.com
+Password: zNin4qPZiCayxC4
+
+---
+
 ## ✨ Features
 
 ### Authentication & Users

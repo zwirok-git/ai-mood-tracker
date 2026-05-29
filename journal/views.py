@@ -1,12 +1,12 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy, reverse
 from django.views import generic, View
 
 from journal.forms import JournalEntryForm
+from journal.mixins import JournalOwnerRequiredMixin
 from journal.models import JournalEntry
 from journal.services.insight_service.insight_service import InsightService
-from users.mixins import OwnerRequiredMixin
 
 
 class JournalEntryListView(LoginRequiredMixin, generic.ListView):
@@ -37,7 +37,7 @@ class JournalEntryCreateView(LoginRequiredMixin, generic.CreateView):
 
 class JournalEntryUpdateView(
     LoginRequiredMixin,
-    OwnerRequiredMixin,
+    JournalOwnerRequiredMixin,
     generic.UpdateView
 ):
     model = JournalEntry
@@ -50,7 +50,7 @@ class JournalEntryUpdateView(
 
 class JournalEntryDeleteView(
     LoginRequiredMixin,
-    OwnerRequiredMixin,
+    JournalOwnerRequiredMixin,
     generic.DeleteView
 ):
     model = JournalEntry
@@ -60,7 +60,7 @@ class JournalEntryDeleteView(
 
 class JournalEntryDetailView(
     LoginRequiredMixin,
-    OwnerRequiredMixin,
+    JournalOwnerRequiredMixin,
     generic.DetailView
 ):
     model = JournalEntry

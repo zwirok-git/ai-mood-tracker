@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Delete entry{% endblock %}
+{% block content %}
+  {% include "includes/navbar.html" %}
+  <section class="login-layout">
+    <section class="login-copy">
+      <h1>
+        Delete
+        <br>
+        entry.
+      </h1>
+      <p>This action cannot be undone.</p>
+    </section>
+    <section class="login-panel">
+      <form method="post" class="login-form">
+        {% csrf_token %}
+        <h2>Delete reflection?</h2>
+        <p>{{ object.title }}</p>
+        <div class="profile-actions">
+          <button type="submit" class="danger-btn">Delete forever</button>
+          <a href="{% url "journal:entry" object.id %}" class="primary-btn">Cancel</a>
+        </div>
+      </form>
+    </section>
+  </section>
+{% endblock %}

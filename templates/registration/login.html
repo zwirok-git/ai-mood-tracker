@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+  {% include "includes/navbar.html" %}
+  <section class="login-layout">
+    <section class="login-copy">
+      <h1>
+        Welcome
+        <br>
+        back.
+      </h1>
+      <p>
+        Continue your journey
+        of reflection and clarity.
+      </p>
+    </section>
+    <section class="login-panel">
+      <form method="post" class="login-form">
+        {% csrf_token %}
+        <h2>Sign in to Mood Tracker</h2>
+        {% if form.non_field_errors %}<div class="form-error">{{ form.non_field_errors }}</div>{% endif %}
+        <div class="field">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+        </div>
+        <div class="field">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+        </div>
+        <button class="primary-btn" type="submit">Sign in →</button>
+      </form>
+    </section>
+  </section>
+{% endblock %}

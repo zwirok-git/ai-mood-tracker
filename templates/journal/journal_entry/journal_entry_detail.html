@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ object.title|default:"Reflection" }}{% endblock %}
+{% block content %}
+  {% include "includes/navbar.html" %}
+  <section class="login-layout">
+    <section class="login-copy" id="insight-state">
+      {% include "htmx_components/insight_state.html" with entry=object %}
+    </section>
+    <section class="login-panel">
+      <article class="entry-card entry-detail-card">
+        <div class="entry-meta">
+          <span>
+            Mood:
+            {{ object.mood_score }}/10
+          </span>
+        </div>
+        <div class="entry-content">{{ object.content|linebreaks }}</div>
+        {% if object.tags.all %}
+          <div class="entry-tags">
+            {% for tag in object.tags.all %}
+              <span class="mood-pill entry-tag" style="--tag-color: {{ tag.color }}">
+                {{ tag.emoji }}
+                {{ tag.name }}
+              </span>
+            {% endfor %}
+          </div>
+        {% endif %}
+        <section id="insight-container">
+          {% if object.ai_insight %}
+            {% include "htmx_components/insight_section.html" with insight=object.ai_insight %}
+          {% endif %}
+        </section>
+        <div class="profile-actions">
+          <a href="{% url "journal:entry-edit" object.id %}"  class="primary-btn">Edit →</a>
+          <a href="{% url "journal:entry-delete" object.id %}"  class="danger-btn">Delete</a>
+        </div>
+      </article>
+    </section>
+  </section>
+{% endblock %}

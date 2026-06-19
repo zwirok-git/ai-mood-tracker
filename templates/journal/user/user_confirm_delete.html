@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Delete profile{% endblock %}
+{% block content %}
+  {% include "includes/navbar.html" %}
+  <section class="login-layout">
+    <section class="login-copy">
+      <h1>
+        Delete
+        <br>
+        account.
+      </h1>
+      <p>
+        This action permanently removes
+        your profile and journal history.
+      </p>
+    </section>
+    <section class="login-panel">
+      <form method="post" class="login-form">
+        {% csrf_token %}
+        <h2>Are you sure?</h2>
+        <p class="delete-text">
+          You are about to delete
+          <strong>{{ object.username }}</strong>
+          and all related data.
+        </p>
+        <div class="delete-warning">This action cannot be undone.</div>
+        <div class="profile-actions">
+          <button type="submit" class="danger-btn">Delete forever</button>
+          <a href="{% url "account:profile-edit" object.id %}"
+             class="secondary-btn">Cancel</a>
+        </div>
+      </form>
+    </section>
+  </section>
+{% endblock %}

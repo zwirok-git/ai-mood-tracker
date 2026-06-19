@@ -1,0 +1,22 @@
+{% load static %}
+<nav class="navbar" id="navbar">
+  <a href="{% url "journal:home" %}" class="nav-logo">
+    <img src="{% static "favicon/favicon.svg" %}"
+         alt="Mood Tracker"
+         class="brand-icon">
+    <span>Mood Tracker</span></a>
+  <div class="nav-links">
+    {% if user.is_authenticated %}
+      <a href="{% url "journal:journal-entry-list" %}">Journal</a>
+      <a href="{% url "account:profile" user.id %}">Profile</a>
+      <form method="post" action="{% url "account:logout" %}" class="logout-form">
+        {% csrf_token %}
+        <button type="submit" class="nav-cta">Logout →</button>
+      </form>
+    {% else %}
+      <a href="#journal">Journal</a>
+      <a href="{% url "account:login" %}">Login</a>
+      <a href="{% url "account:register" %}" class="nav-cta">Get started →</a>
+    {% endif %}
+  </div>
+</nav>

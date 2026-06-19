@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+  {% include "includes/navbar.html" %}
+  <section class="login-layout">
+    <section class="login-copy">
+      <h1>
+        Your
+        <br>
+        profile.
+      </h1>
+      <p>
+        Manage your account
+        and personal settings.
+      </p>
+    </section>
+    <section class="login-panel">
+      <div class="login-form">
+        <h2>{{ user.username }}</h2>
+        <div class="field">
+          <label>Email</label>
+          <div>{{ user.email }}</div>
+        </div>
+        <div class="field">
+          <label>First name</label>
+          <div>{{ user.first_name }}</div>
+        </div>
+        <div class="field">
+          <label>Last name</label>
+          <div>{{ user.last_name }}</div>
+        </div>
+        <a href="{% url "account:profile-edit" user.id %}" class="primary-btn">Edit profile →</a>
+      </div>
+    </section>
+  </section>
+{% endblock %}
